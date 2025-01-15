@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Preview - SnapCode</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      padding: 20px;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="codeTitle">Code Preview</h1>
+  <pre id="codePreview"></pre>
+
+  <script>
+    // Extracting the title and code from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get('title');
+    const code = decodeURIComponent(urlParams.get('code'));
+
+    // Display the title and code
+    document.getElementById('codeTitle').textContent = title || "Untitled Code";
+    document.getElementById('codePreview').textContent = code;
+  </script>
+</body>
+</html>
