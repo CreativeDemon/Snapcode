@@ -1,6 +1,6 @@
 # SnapCode
 
-SnapCode is an anonymous platform that allows users to share code quickly and easily. No data, information, or code is collected or stored, ensuring complete privacy. Users can upload or paste their code, generate a shareable link, and share it without any tracking or data collection.
+SnapCode [https://creativedemon.github.io/Snapcode/] is an anonymous platform that allows users to share code quickly and easily. No data, information, or code is collected or stored, ensuring complete privacy. Users can upload or paste their code, generate a shareable link, and share it without any tracking or data collection.
 
 ## Features
 
