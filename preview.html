@@ -1,28 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Preview - SnapCode</title>
+  <title>SnapCode Code Preview</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background-color: #121212;
       color: #fff;
-      padding: 20px;
+      text-align: center;
     }
+
+    .content {
+      padding: 20px 2%;
+    }
+
     pre {
       background-color: #1e1e1e;
       padding: 10px;
       border-radius: 5px;
       overflow-x: auto;
+      text-align: left;
+      margin-bottom: 20px;
+      width: 96vw;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
-<body>
-  <h1 id="codeTitle">Code Preview</h1>
-  <pre id="codePreview"></pre>
 
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/index.html">SnapCode</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ol class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/about.html">About SnapCode</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact.html">Get in Touch</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="/privacy-policy.md">privacy policy</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </nav>
+  <div class="content">
+
+    <h1 id="codeTitle">Code Preview</h1>
+    <pre id="codePreview"></pre>
+    <button onclick="downloadCode()">Download Code</button>
+  </div>
   <script>
     // Extracting the title and code from the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -32,6 +88,19 @@
     // Display the title and code
     document.getElementById('codeTitle').textContent = title || "Untitled Code";
     document.getElementById('codePreview').textContent = code;
+
+    // Function to download the code as a file
+    function downloadCode() {
+      const fileName = title ? `${title}.txt` : 'untitled.txt';
+      const blob = new Blob([code], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+    }
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-</html>
+
+    </html>
