@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #1e90ff;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            background-color: #282828;
+            color: #f5f5f5;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #282828;
+            color: #f5f5f5;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn {
+            background-color: #1e90ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            width: 150px;
+        }
+        .btn:hover {
+            background-color: #4682b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Your Code</h1>
+        <form id="codeForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required placeholder="Enter title">
+
+            <label for="code">Code:</label>
+            <textarea id="code" name="code" required placeholder="Paste your code here"></textarea>
+
+            <button type="submit" class="btn">Generate Preview URL</button>
+        </form>
+
+        <h3>Generated Preview URL:</h3>
+        <input type="text" id="previewUrl" readonly placeholder="Preview URL will appear here">
+    </div>
+
+    <script>
+        document.getElementById('codeForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            // Get the title and code input
+            const title = document.getElementById('title').value;
+            const code = document.getElementById('code').value;
+            
+            // Encode the code to Base64
+            const encodedCode = btoa(code);
+            
+            // Create the preview URL
+            const previewUrl = `https://creativedemon.github.io/Snapcode/preview.html?title=${encodeURIComponent(title)}&code=${encodeURIComponent(encodedCode)}`;
+            
+            // Display the preview URL
+            document.getElementById('previewUrl').value = previewUrl;
+        });
+    </script>
+</body>
+</html>
