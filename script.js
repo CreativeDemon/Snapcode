@@ -67,3 +67,15 @@ function displayResult(link, fileName, code, title) {
     `;
     resultDiv.style.display = 'block';
 }
+
+function generateLink() {
+    const code = document.getElementById("code").value;
+    const title = document.getElementById("title").value || "untitled";
+    const encodedCode = encodeURIComponent(code);
+    const link = `${window.location.origin}/preview.html?title=${title}&code=${encodedCode}`;
+    
+    document.getElementById("generatedLink").innerHTML = `
+      <p>Share this link:</p>
+      <a href="${link}" target="_blank">${link}</a>
+    `;
+  }
