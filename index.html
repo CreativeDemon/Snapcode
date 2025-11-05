@@ -1,50 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Share</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SnapCode — Share code quickly</title>
+
+  <!-- Responsive, modern style (no external CSS frameworks) -->
+  <style>
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #93a0b5;
+      --accent: #6ee7b7;
+      --glass: rgba(255, 255, 255, 0.04);
+      --radius: 14px;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+      --max-width: 1100px;
+      --gap: 18px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, #061024 100%);
+      color: #e6eef6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px
+    }
+
+    .app {
+      width: 100%;
+      max-width: var(--max-width)
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 12px
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #00d4a6, #0066ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #041827
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0
+    }
+
+    p.lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      font-size: 18px
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--gap)
+    }
+
+    /* Left - editor/card */
+    .card {
+      background: linear-gradient(180deg, var(--card), #081123);
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 30px rgba(2, 6, 23, 0.6);
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px
+    }
+
+    .controls input[type=text] {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      color: inherit
+    }
+
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer
+    }
+
+    textarea#codeInput {
+      width: 100%;
+      min-height: 380px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #071021;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      color: #dfeffc;
+      font-family: var(--mono);
+      font-size: 13px;
+      resize: vertical
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #052026;
+      font-weight: 700
+    }
+
+    button.secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    /* Right column - preview */
+    .preview {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .preview .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .preview pre {
+      flex: 1;
+      margin: 0;
+      padding: 14px;
+      border-radius: 10px;
+      background: #03101a;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      overflow: auto;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #cfeef0
+    }
+
+    .resultBox {
+      padding: 12px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      color: var(--muted)
+    }
+
+    footer {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center
+    }
+
+    /* Responsive adjustments */
+    @media (max-width:1024px) {
+      .main {
+        grid-template-columns: 1fr 320px
+      }
+
+      textarea#codeInput {
+        min-height: 300px
+      }
+    }
+
+    @media (max-width:760px) {
+      body {
+        padding: 16px
+      }
+
+      header {
+        align-items: flex-start
+      }
+
+      nav {
+        display: none
+      }
+
+      .menu-toggle {
+        display: inline-flex
+      }
+
+      .main {
+        grid-template-columns: 1fr
+      }
+
+      .preview {
+        order: 2
+      }
+
+      .card {
+        padding: 14px
+      }
+
+      textarea#codeInput {
+        min-height: 220px
+      }
+
+      .actions {
+        flex-direction: column
+      }
+
+      .actions button {
+        width: 100%
+      }
+
+      .resultBox {
+        font-size: 14px
+      }
+    }
+
+    /* small screens: make preview collapsible */
+    .preview.collapsed {
+      display: none
+    }
+
+    .previewToggle {
+      display: none
+    }
+
+    @media (max-width:760px) {
+      .previewToggle {
+        display: flex;
+        gap: 8px;
+        margin: 10px 0 0 0;
+        align-items: center
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/index.html">SnapCode</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ol class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About SnapCode</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Get in Touch</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="privacy-policy.html">privacy policy</a>
-          </li>
-        </ol>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>SC</div>
+        <div>
+          <h1>SnapCode</h1>
+          <p class="lead">Share code snippets quickly — copy link or download the file.</p>
+        </div>
       </div>
-    </div>
-  </nav>
-<a href="" rel="nofollow"><img alt="banner" src="https://landings-cdn.adsterratech.com/referralBanners/png/468%20x%2060%20px.png" /></a>
-  <div class="content">
-    <div class="container">
-      <h1>Share your code</h1>
-      <input type="text" id="fileTitle" placeholder="Enter file title..." />
-      <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
-      <input type="file" id="fileInput" accept=".txt,.js,.html,.css,.py,.java,.cpp,.c, .rss, .json">
-      <button id="generateLink">Generate Link</button>
-      <div id="result"></div>
-    </div>
+
+      <div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        <nav aria-label="top nav" id="topNav">
+          <a href="/about.html" style="color:var(--muted);text-decoration:none;margin-right:12px">About</a>
+          <a href="/contact.html" style="color:var(--muted);text-decoration:none">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="card">
+        <div class="controls">
+          <input id="fileTitle" type="text" placeholder="File title — e.g. app.js or hello.py"
+            aria-label="file title" />
+          <label for="fileInput">
+            <input id="fileInput" type="file" accept=".txt,.js,.html,.css,.py,.java,.cpp,.c,.json"
+              style="display:none" />
+            📁 Upload
+          </label>
+        </div>
+
+        <textarea id="codeInput" placeholder="Paste your code here...
+You can also upload a file to load its contents."></textarea>
+
+        <div class="actions">
+          <button id="generateLink">Generate shareable link</button>
+          <button id="downloadBtn" class="secondary">Download file</button>
+          <button id="clearBtn" class="secondary">Clear</button>
+        </div>
+
+        <div id="result" class="resultBox" style="margin-top:12px;display:none"></div>
+
+        <!-- preview toggle for mobile -->
+        <div class="previewToggle" id="previewToggle" style="display:none">
+          <button id="togglePreviewBtn" class="secondary">Show preview</button>
+        </div>
+      </section>
+
+
+      <aside class="preview card" id="previewCol">
+        <div class="meta">
+          <strong style="font-size:14px">Preview</strong>
+          <div style="font-size:13px;color:var(--muted)">Live preview (read-only)</div>
+        </div>
+
+        <pre id="preview"><code>// your code preview appears here...</code></pre>
+
+        <div class="resultBox">
+          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+            <div style="font-size:13px;color:var(--muted)">Shareable link</div>
+            <div style="display:flex;gap:8px">
+              <button id="copyBtn" class="secondary">Copy link</button>
+            </div>
+          </div>
+          <div id="shareLink" style="margin-top:8px;word-break:break-all;color:#bfeadf;font-size:13px">—</div>
+        </div>
+
+      </aside>
+    </main>
+
+    <footer>Made with ♥ — SnapCode · Lightweight client-side sharing</footer>
   </div>
 
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+    // Small, dependency-free script: load file content, create sharable data URL (base64), copy & download
+    const fileInput = document.getElementById('fileInput');
+    const codeInput = document.getElementById('codeInput');
+    const preview = document.getElementById('preview');
+    const generateLink = document.getElementById('generateLink');
+    const result = document.getElementById('result');
+    const shareLink = document.getElementById('shareLink');
+    const copyBtn = document.getElementById('copyBtn');
+    const fileTitle = document.getElementById('fileTitle');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const menuToggle = document.getElementById('menuToggle');
+    const topNav = document.getElementById('topNav');
+    const previewCol = document.getElementById('previewCol');
+    const togglePreviewBtn = document.getElementById('togglePreviewBtn');
+
+    // show live preview
+    function updatePreview() {
+      const txt = codeInput.value || '// your code preview appears here...';
+      // escape HTML
+      preview.innerText = txt;
+    }
+    codeInput.addEventListener('input', updatePreview);
+
+    // load file
+    fileInput.addEventListener('change', (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        codeInput.value = reader.result;
+        if (!fileTitle.value) fileTitle.value = f.name;
+        updatePreview();
+      }
+      reader.readAsText(f);
+    });
+
+    // Clear
+    clearBtn.addEventListener('click', () => {
+      fileTitle.value = '';
+      codeInput.value = '';
+      shareLink.innerText = '—';
+      result.style.display = 'none';
+      updatePreview();
+    })
+
+    // Generate shareable link (data URL). Warning: large files will produce big URLs.
+    generateLink.addEventListener('click', () => {
+      const content = codeInput.value;
+      if (!content) {
+        result.style.display = 'block';
+        result.innerText = 'Please paste or upload some code first.';
+        return;
+      }
+      const filename = (fileTitle.value || 'snippet.txt').replace(/[^a-zA-Z0-9.\-_]/g, '_');
+      const mime = 'text/plain;charset=utf-8';
+      // create data url base64
+      const b64 = btoa(unescape(encodeURIComponent(content)));
+      const dataUrl = `data:${mime};base64,${b64}`;
+
+      // Create a short-ish link using URL.createObjectURL with blob (safer than giant data URL for copying)
+      const blob = new Blob([content], { type: 'text/plain' });
+      const blobUrl = URL.createObjectURL(blob);
+
+      shareLink.innerText = blobUrl;
+      shareLink.dataset.blob = blobUrl;
+      shareLink.dataset.filename = filename;
+      result.style.display = 'block';
+      result.innerText = 'Link generated — note: this link is temporary for this browser session. For permanent sharing you need a backend to store the snippet.';
+    });
+
+    // Copy link
+    copyBtn.addEventListener('click', async () => {
+      const url = shareLink.dataset.blob;
+      if (!url) {
+        result.style.display = 'block';
+        result.innerText = 'No link to copy. Generate one first.';
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        result.style.display = 'block';
+        result.innerText = 'Link copied to clipboard.';
+      } catch (e) {
+        result.style.display = 'block';
+        result.innerText = 'Failed to copy. You can manually select and copy the link.';
+      }
+    });
+
+    // Download file
+    downloadBtn.addEventListener('click', () => {
+      const content = codeInput.value;
+      if (!content) { result.style.display = 'block'; result.innerText = 'Nothing to download.'; return; }
+      const filename = (fileTitle.value || 'snippet.txt').replace(/[^a-zA-Z0-9.\-_]/g, '_');
+      const blob = new Blob([content], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    // Menu toggle for small screens
+    menuToggle.addEventListener('click', () => {
+      if (topNav.style.display === 'flex') topNav.style.display = 'none';
+      else topNav.style.display = 'flex';
+    });
+
+    // Preview toggle for small screens
+    if (togglePreviewBtn) {
+      togglePreviewBtn.addEventListener('click', () => {
+        if (previewCol.classList.contains('collapsed')) {
+          previewCol.classList.remove('collapsed');
+          togglePreviewBtn.innerText = 'Hide preview';
+        } else {
+          previewCol.classList.add('collapsed');
+          togglePreviewBtn.innerText = 'Show preview';
+        }
+      });
+    }
+
+    // Show preview toggle button only on small screens
+    function handleResize() {
+      const width = window.innerWidth;
+      const previewToggle = document.getElementById('previewToggle');
+      if (width <= 760 && previewToggle) {
+        previewToggle.style.display = 'flex';
+        topNav.style.display = 'none';
+      } else if (previewToggle) {
+        previewToggle.style.display = 'none';
+        topNav.style.display = 'flex';
+        previewCol.classList.remove('collapsed');
+      }
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    // Initialize preview
+    updatePreview();
+  </script>
 </body>
 
 </html>

@@ -1,136 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About SnapCode</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About SnapCode — Simple code sharing</title>
+  <meta name="description" content="SnapCode — lightweight, privacy-first snippets sharing for developers." />
   <style>
-    .box {
-      font-family: 'Arial', sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    :root{
+      --bg:#071022;
+      --card:#081426;
+      --muted:#94a3b8;
+      --accent:#56d0c5;
+      --accent-2:#6ea8ff;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --max:1100px;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:var(--sans);background:linear-gradient(180deg,var(--bg),#031023);color:#eaf2fb}
 
-    .container {
-      width: 90%;
-      max-width: 800px;
-      padding: 20px;
-      background-color: #1e1e1e;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
+    .site{max-width:var(--max);margin:28px auto;padding:20px}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#012;}
+    .brand h1{font-size:16px;margin:0}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px}
 
-    header h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+    .card{background:linear-gradient(180deg,var(--card),#02101b);padding:20px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(2,6,18,0.6);}
 
-    .about-section h2 {
-      margin-top: 20px;
-      color: #66b3ff;
-    }
+    .lead{color:var(--muted);margin-top:8px}
 
-    .about-section p,
-    .about-section ul {
-      line-height: 1.6;
-    }
+    h2{color:#d7f7f0;margin-top:0}
+    p{line-height:1.6;color:#d9eaf2}
 
-    ul {
-      padding-left: 20px;
-    }
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    .feature{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid var(--glass)}
+    .feature strong{display:block;margin-bottom:6px}
 
-    ul li {
-      margin-bottom: 10px;
-    }
+    .cta{display:flex;gap:10px;margin-top:14px}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:0;cursor:pointer}
+    .btn.primary{background:var(--accent);color:#042;}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-    a {
-      color: #66b3ff;
-      text-decoration: none;
-    }
+    .side-meta{display:flex;flex-direction:column;gap:12px}
+    .meta-card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid var(--glass)}
+    .meta-card small{color:var(--muted)}
 
-    a:hover {
-      text-decoration: underline;
-    }
+    footer{text-align:center;color:var(--muted);margin-top:18px;font-size:13px}
 
-    footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-      color: #777;
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr}
     }
   </style>
 </head>
-
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/index.html">SnapCode</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ol class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="/about.html">About SnapCode</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact.html">Get in Touch</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="/privacy-policy.md">privacy policy</a>
-          </li>
-        </ol>
+  <div class="site">
+    <nav>
+      <div class="brand">
+        <div class="logo">SC</div>
+        <div>
+          <h1>SnapCode</h1>
+          <div class="lead">Fast, privacy-first snippet sharing for developers</div>
+        </div>
       </div>
-    </div>
-  </nav>
+      <div>
+        <a href="/index.html">Home</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy-policy.md">Privacy</a>
+      </div>
+    </nav>
 
-  <div class="box">
-    <div class="container">
-      <header>
-        <h1>About SnapCode</h1>
-      </header>
-      <section class="about-section">
-        <h2>What is SnapCode?</h2>
+    <main class="hero">
+      <section class="card">
+        <h2>About SnapCode</h2>
         <p>
-          SnapCode is a simple and efficient platform designed to help developers, programmers, and enthusiasts share their code snippets effortlessly. Whether you're working on a collaborative project, need to share code with your team, or simply want to save your code snippets for future reference, SnapCode makes it easy.
+          SnapCode is a minimal, developer-friendly platform built to make sharing code snippets fast and frictionless. Whether you're collaborating with a teammate, sending a quick example in chat, or storing a useful snippet for later, SnapCode focuses on usability, speed, and privacy.
         </p>
 
-        <h2>Why Choose SnapCode?</h2>
-        <p>
-          SnapCode stands out because of its simplicity and user-friendly interface. With SnapCode, you can:
-        </p>
-        <ul>
-          <li>Upload your code files or paste your code directly into the editor.</li>
-          <li>Automatically detect the programming language and generate the appropriate file extension.</li>
-          <li>Share your code with a unique link, allowing others to preview or download the code instantly.</li>
-          <li>Enjoy a minimalistic, modern design with support for dark mode for comfortable coding sessions.</li>
-        </ul>
+        <h3 style="margin-top:18px">Why SnapCode?</h3>
+        <div class="features">
+          <div class="feature">
+            <strong>Paste & Upload</strong>
+            Paste code or upload files — SnapCode handles both with the same lightweight UI.
+          </div>
+          <div class="feature">
+            <strong>Temporary Links</strong>
+            Generate session-safe blob links instantly (or use a backend to create permanent short URLs).
+          </div>
+          <div class="feature">
+            <strong>Privacy-first</strong>
+            Files remain client-side unless you opt to save them to a server — no surprise uploads.
+          </div>
+          <div class="feature">
+            <strong>Dark-friendly UI</strong>
+            Comfortable dark UI for long coding sessions and easy integration into developer workflows.
+          </div>
+        </div>
 
-        <h2>Our Mission</h2>
+        <h3 style="margin-top:18px">Our Mission</h3>
         <p>
-          At SnapCode, our mission is to create a seamless code-sharing experience for developers worldwide. We believe that sharing knowledge and collaborating on code should be as straightforward as possible, and SnapCode is here to make that happen.
+          We want to reduce the friction of sharing code. SnapCode is built for speed and simplicity so you can focus on building — not formatting links.
         </p>
 
-        <h2>Get Started</h2>
-        <p>
-          Ready to share your code? <a href="index.html">Start using SnapCode</a> today and experience the ease of sharing code snippets with anyone, anywhere.
-        </p>
+        <div class="cta">
+          <a class="btn primary" href="/index.html">Start sharing</a>
+          <a class="btn ghost" href="/contact.html">Get in touch</a>
+        </div>
       </section>
-      <footer>
-        <p>&copy; 2025 SnapCode. All rights reserved.</p>
-      </footer>
 
-    </div>
+      <aside class="side-meta">
+        <div class="meta-card">
+          <small>Quick facts</small>
+          <div style="margin-top:8px"><strong>Founded</strong><div class="lead">2024</div></div>
+          <div style="margin-top:8px"><strong>Built for</strong><div class="lead">Developers, educators, teams</div></div>
+        </div>
+
+        <div class="meta-card">
+          <small>How it works</small>
+          <p class="lead" style="margin:8px 0 0 0">You can paste code, upload a file, and generate a temporary shareable link. For permanent sharing, connect to a backend to store snippets and return a short URL.</p>
+        </div>
+
+        <div class="meta-card">
+          <small>Contact</small>
+          <p class="lead" style="margin:8px 0 0 0">Questions, feedback, or feature requests? <a href="/contact.html">Send us a message</a>.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      &copy; 2025 SnapCode · Lightweight · Privacy-focused
+    </footer>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-
 </html>
