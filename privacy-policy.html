@@ -1,147 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About SnapCode</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy — SnapCode</title>
+  <meta name="description" content="Privacy policy for SnapCode — minimal, privacy-first snippet sharing." />
   <style>
-    .box {
-      font-family: 'Arial', sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    :root{
+      --bg:#071022;
+      --card:#081426;
+      --muted:#98a8bc;
+      --accent:#56d0c5;
+      --accent-2:#6ea8ff;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --max:1100px;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:var(--sans);background:linear-gradient(180deg,var(--bg),#021025);color:#eaf2fb}
+
+    .site{max-width:var(--max);margin:28px auto;padding:20px}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#012;}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px}
+
+    .card{background:linear-gradient(180deg,var(--card),#02101b);padding:22px;border-radius:var(--radius);box-shadow:0 10px 40px rgba(2,6,18,0.6);}
+    header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+    header h1{margin:0;font-size:20px}
+    header small{color:var(--muted)}
+
+    .content{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:16px}
+    .section h2{margin-top:0;color:#c8f1ec}
+    .section p, .section ul{color:#d9eef2;line-height:1.6}
+    ul{padding-left:18px}
+    .meta{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid var(--glass);color:var(--muted)}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    @media (max-width:980px){
+      .content{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      .site{padding:14px}
+      header{flex-direction:column;align-items:flex-start}
     }
 
-    .container {
-      width: 90%;
-      max-width: 800px;
-      padding: 20px;
-      background-color: #1e1e1e;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    header h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .about-section h2 {
-      margin-top: 20px;
-      color: #66b3ff;
-    }
-
-    .about-section p,
-    .about-section ul {
-      line-height: 1.6;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    ul li {
-      margin-bottom: 10px;
-    }
-
-    a {
-      color: #66b3ff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-      color: #777;
+    /* print-friendly */
+    @media print{
+      body{background:white;color:black}
+      .site{box-shadow:none}
+      nav,footer{display:none}
     }
   </style>
 </head>
-
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/index.html">SnapCode</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ol class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/about.html">About SnapCode</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/privacy-policy.html">Get in Touch</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/privacy-policy.html">privacy policy</a>
-          </li>
-        </ol>
+  <div class="site">
+    <nav>
+      <div class="brand">
+        <div class="logo">SC</div>
+        <div>
+          <strong>SnapCode</strong>
+          <div style="font-size:12px;color:var(--muted)">Privacy-first snippet sharing</div>
+        </div>
       </div>
-    </div>
-  </nav>
+      <div>
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </nav>
 
-  <div class="box">
-    <div class="container">
+    <main class="card">
       <header>
-        <h1>Privacy Policy</h1>
+        <div>
+          <h1>Privacy Policy</h1>
+          <small>Effective date: January 15, 2025 · Last updated: January 15, 2025</small>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onclick="window.print()" style="background:transparent;border:1px solid var(--glass);color:var(--muted);padding:8px 10px;border-radius:8px;cursor:pointer">Print</button>
+          <a href="mailto:animemanji80@gmail.com" style="background:var(--accent);color:#021; padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:700">Contact</a>
+        </div>
       </header>
-      <section class="about-section">
-        <h2>Effective Date</h2>
-        <p>
-          SnapCode ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains our practices regarding data collection and usage when you visit our website.
-        </p>
 
-        <h2>1. No Data Collection</h2>
-        <p>
-          SnapCode is designed to ensure complete anonymity. We do not collect, store, or share any personal data, information, or code you upload or paste on our platform. All interactions with our Site are entirely anonymous.
-        </p>
+      <div class="content">
+        <section class="section">
+          <h2>Overview</h2>
+          <p>SnapCode ("we", "our", "us") is committed to protecting your privacy. This Privacy Policy explains our practices related to data collection and usage when you visit and use SnapCode.</p>
 
-        <h2>Usage Data</h2>
-        <p>
-          We do not track or collect any usage data, including IP addresses, browser types, or any other identifiable information.
-        </p>
+          <h2>No Data Collection</h2>
+          <p>We design SnapCode to be privacy-first. By default, SnapCode does not collect, store, or share personal data. Snippets you paste or upload remain on your device and are not sent to our servers unless you explicitly choose to save them to a backend service.</p>
 
-        <h2>Cookies</h2>
-        <p>
-          SnapCode does not use cookies or any similar tracking technologies to gather information about your activity on our Site.
-        </p>
+          <h2>Usage Data & Cookies</h2>
+          <p>SnapCode does not track usage data such as IP addresses, browser fingerprints, or other telemetry. We do not use cookies or third-party trackers in the default client-side-only mode.</p>
 
-        <h2>2. Security of Your Code</h2>
-        <p>Although we do not store or access the code you upload or paste, we implement security measures to ensure that the code you share via our service remains private and is only accessible through the unique shareable link generated for you.</p>
+          <h2>Security of Snippets</h2>
+          <p>When operating in client-side mode, snippets are stored in memory or session-local blob URLs and are only accessible in your browser session. If you choose to save snippets to a server (for permanent sharing), please review that service's privacy practices before uploading.</p>
 
-        <h2>3. Third-Party Links</h2>
-        <p>The Site may contain links to third-party websites that are not affiliated with us. Once you have used these links to leave our Site, any information you provide to these third parties is not covered by this Privacy Policy.</p>
+          <h2>Third-Party Links</h2>
+          <p>Our site may contain links to third-party websites (e.g., documentation, libraries). We are not responsible for the privacy practices of those sites.</p>
 
-        <h2>4. Policy for Children</h2>
-        <p>SnapCode is designed for general use and does not knowingly solicit information from or market to children under the age of 13.</p>
+          <h2>Children</h2>
+          <p>SnapCode is not directed at children under 13 and does not knowingly collect information from them.</p>
+        </section>
 
-        <h2>5. Changes to This Privacy Policy</h2>
-        <p>We may update this Privacy Policy from time to time. You are encouraged to periodically review this Privacy Policy to stay informed of updates.</p>
+        <aside class="meta">
+          <strong>Quick facts</strong>
+          <div style="margin-top:10px">
+            <div><strong>Data collection:</strong> None by default</div>
+            <div style="margin-top:6px"><strong>Cookies:</strong> Not used</div>
+            <div style="margin-top:6px"><strong>Contact:</strong> <a href="mailto:animemanji80@gmail.com" style="color:var(--accent);text-decoration:none">animemanji80@gmail.com</a></div>
+            <div style="margin-top:6px"><strong>Last updated:</strong> 15 Jan 2025</div>
+          </div>
+        </aside>
+      </div>
+
+      <section style="margin-top:18px">
+        <h2>Changes to this Policy</h2>
+        <p>We may update this Privacy Policy occasionally. If we make significant changes, we will indicate the date of modification at the top of this page.</p>
 
         <h2>Contact Us</h2>
-        <p>If you have questions or comments about this Privacy Policy, please contact us at: <strong>animemanji80@gmail.com
-        <br/>
-        Last Updated: 15/01/2025</strong></p>
+        <p>If you have questions about this policy, please email us at <a href="mailto:animemanji80@gmail.com" style="color:var(--accent)">animemanji80@gmail.com</a>.</p>
       </section>
-      <footer>
-        <p>&copy; 2025 SnapCode. All rights reserved.</p>
-      </footer>
 
-    </div>
+    </main>
+
+    <footer>
+      &copy; 2025 SnapCode · Lightweight · Privacy-first
+    </footer>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-
 </html>
